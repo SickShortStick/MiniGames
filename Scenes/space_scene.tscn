@@ -1,0 +1,163 @@
+[gd_scene load_steps=15 format=3 uid="uid://btcrbv73w6mnh"]
+
+[ext_resource type="PackedScene" uid="uid://b0mh43o46ctdp" path="res://Scenes/player.tscn" id="1_dwyqf"]
+[ext_resource type="Script" uid="uid://7mk6e3eyw8k2" path="res://Scripts/space_scene.gd" id="1_spkxt"]
+[ext_resource type="Script" uid="uid://j2xpqx8dgnxe" path="res://Scripts/asteroid_spawner.gd" id="2_mvba5"]
+[ext_resource type="Script" uid="uid://dlwdfwtg6e5r6" path="res://Scripts/power_up_spawner.gd" id="4_dxw6d"]
+[ext_resource type="Theme" uid="uid://ojnu4qmpjlkl" path="res://Themes/UI.tres" id="4_vqv81"]
+[ext_resource type="Texture2D" uid="uid://cryn0qcm3ubvn" path="res://Assets/Sprites/BackGround-Sheet.png" id="5_dxw6d"]
+[ext_resource type="Texture2D" uid="uid://cilb0pxekwcni" path="res://Assets/Sprites/Button.svg" id="6_jq4nj"]
+
+[sub_resource type="Curve2D" id="Curve2D_mvba5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 720, 720, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_124nk"]
+atlas = ExtResource("5_dxw6d")
+region = Rect2(0, 0, 720, 1020)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu4ar"]
+atlas = ExtResource("5_dxw6d")
+region = Rect2(720, 0, 720, 1020)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p8fg"]
+atlas = ExtResource("5_dxw6d")
+region = Rect2(1440, 0, 720, 1020)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6es0x"]
+atlas = ExtResource("5_dxw6d")
+region = Rect2(2160, 0, 720, 1020)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2anaj"]
+atlas = ExtResource("5_dxw6d")
+region = Rect2(2880, 0, 720, 1020)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2anaj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_124nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu4ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p8fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6es0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2anaj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpaceScene" type="Node"]
+script = ExtResource("1_spkxt")
+
+[node name="Player" parent="." instance=ExtResource("1_dwyqf")]
+position = Vector2(360, 360)
+
+[node name="AsteroidSpawner" type="Node" parent="."]
+script = ExtResource("2_mvba5")
+
+[node name="SpawnerTimer" type="Timer" parent="AsteroidSpawner"]
+autostart = true
+
+[node name="PowerUpSpawner" type="Node" parent="."]
+script = ExtResource("4_dxw6d")
+
+[node name="PowerUpTimer" type="Timer" parent="PowerUpSpawner"]
+wait_time = 3.0
+autostart = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_mvba5")
+
+[node name="SpawnLine" type="PathFollow2D" parent="Path2D"]
+rotation = 1.5708
+
+[node name="BackGround" type="AnimatedSprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(360, 510)
+sprite_frames = SubResource("SpriteFrames_2anaj")
+autoplay = "default"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("4_vqv81")
+
+[node name="ScoreLabel" type="Label" parent="GUI/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 67.0
+grow_horizontal = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -180.0
+offset_right = 360.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BtnGroup" type="HBoxContainer" parent="GUI/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+layout_mode = 2
+texture = ExtResource("6_jq4nj")
+
+[node name="LeftBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+layout_mode = 2
+texture = ExtResource("6_jq4nj")
+flip_h = true
+
+[node name="RightBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="timeout" from="AsteroidSpawner/SpawnerTimer" to="AsteroidSpawner" method="_on_spawner_timer_timeout"]
+[connection signal="timeout" from="PowerUpSpawner/PowerUpTimer" to="PowerUpSpawner" method="_on_power_up_timer_timeout"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_up"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_up"]

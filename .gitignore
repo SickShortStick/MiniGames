@@ -1,0 +1,5 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+Assets/Sprites/BackGround-Sheet.svg
+Assets/Sprites/BackGround-Sheet.svg.import

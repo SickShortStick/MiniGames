@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://blgo0grt2ewsq"]
+
+[ext_resource type="Texture2D" uid="uid://d02w77nqfnhxt" path="res://Assets/Sprites/asteroid1.svg" id="1_0tomg"]
+[ext_resource type="Script" uid="uid://btqcbml5xt52y" path="res://Scripts/asteroid.gd" id="1_a2bka"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2bka"]
+radius = 25.02
+
+[node name="Asteroid" type="RigidBody2D" groups=["Asteroids"]]
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_a2bka")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+texture = ExtResource("1_0tomg")
+
+[node name="IceLayer" type="ColorRect" parent="Sprite2D"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.811765, 0.956863, 0.403922)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a2bka")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0mh43o46ctdp"]
+
+[ext_resource type="Script" uid="uid://nwthljtj1f3p" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://m55bqhd11jyq" path="res://Assets/Sprites/Player.svg" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://ocglufk7owui" path="res://Scenes/bullet.tscn" id="2_vgqql"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgqql"]
+radius = 27.0185
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_cvnsp")
+rotation_speed = 200
+bullet_speed = 100
+BULLET_SCENE = ExtResource("2_vgqql")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6t5aa")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vgqql")
+
+[node name="BulletPosition" type="Node2D" parent="."]
+position = Vector2(10, 0)

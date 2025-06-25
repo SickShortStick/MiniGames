@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ocglufk7owui"]
+
+[ext_resource type="Script" uid="uid://cjf354dm8716g" path="res://Scripts/bullet.gd" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://bwbdlw5o74qjv" path="res://Assets/Sprites/bullet.svg" id="1_xjght"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
+radius = 16.0312
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+gravity_scale = 0.0
+linear_velocity = Vector2(20, 0)
+script = ExtResource("1_oduel")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xjght")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oduel")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

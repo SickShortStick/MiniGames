@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://0g5crfn7jbqr"]
+
+[ext_resource type="Texture2D" uid="uid://bopc5y6i0uejy" path="res://Assets/Sprites/ice.svg" id="1_fse5i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fse5i"]
+radius = 24.0208
+
+[node name="Ice" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fse5i")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fse5i")
