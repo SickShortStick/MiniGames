@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://btcrbv73w6mnh"]
+[gd_scene load_steps=17 format=3 uid="uid://btcrbv73w6mnh"]
 
 [ext_resource type="PackedScene" uid="uid://b0mh43o46ctdp" path="res://Scenes/player.tscn" id="1_dwyqf"]
 [ext_resource type="Script" uid="uid://7mk6e3eyw8k2" path="res://Scripts/space_scene.gd" id="1_spkxt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Theme" uid="uid://ojnu4qmpjlkl" path="res://Themes/UI.tres" id="4_vqv81"]
 [ext_resource type="Texture2D" uid="uid://cryn0qcm3ubvn" path="res://Assets/Sprites/BackGround-Sheet.png" id="5_dxw6d"]
 [ext_resource type="Texture2D" uid="uid://cilb0pxekwcni" path="res://Assets/Sprites/Button.svg" id="6_jq4nj"]
+[ext_resource type="Texture2D" uid="uid://c6xbv1kl7nbxl" path="res://Assets/Sprites/ShootButton.png" id="8_124nk"]
+[ext_resource type="Texture2D" uid="uid://tyf5t3qnymt2" path="res://Assets/Sprites/ForeGround.png" id="9_hu4ar"]
 
 [sub_resource type="Curve2D" id="Curve2D_mvba5"]
 _data = {
@@ -82,13 +84,6 @@ curve = SubResource("Curve2D_mvba5")
 [node name="SpawnLine" type="PathFollow2D" parent="Path2D"]
 rotation = 1.5708
 
-[node name="BackGround" type="AnimatedSprite2D" parent="."]
-z_index = -10
-z_as_relative = false
-position = Vector2(360, 510)
-sprite_frames = SubResource("SpriteFrames_2anaj")
-autoplay = "default"
-
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="GUI"]
@@ -98,6 +93,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("4_vqv81")
 
@@ -107,8 +103,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
+offset_top = 756.0
 offset_right = 20.0
-offset_bottom = 67.0
+offset_bottom = 823.0
 grow_horizontal = 2
 text = "0"
 horizontal_alignment = 1
@@ -121,20 +118,26 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -180.0
-offset_right = 360.0
+offset_left = -365.0
+offset_top = -220.0
+offset_right = 365.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="BtnGroup" type="HBoxContainer" parent="GUI/Control/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 60
 
-[node name="TextureRect" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control/MarginContainer/BtnGroup"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("6_jq4nj")
 
-[node name="LeftBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect"]
+[node name="LeftBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,12 +145,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+[node name="TextureRect2" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("6_jq4nj")
 flip_h = true
 
-[node name="RightBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect2"]
+[node name="RightBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -155,9 +158,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect3" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+layout_mode = 2
+texture = ExtResource("8_124nk")
+
+[node name="ShootButton" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGround" type="AnimatedSprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(360, 644)
+scale = Vector2(1.00278, 1.25392)
+sprite_frames = SubResource("SpriteFrames_2anaj")
+autoplay = "default"
+
+[node name="ForeGround" type="Sprite2D" parent="."]
+position = Vector2(360, 649.5)
+texture = ExtResource("9_hu4ar")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 640)
+
 [connection signal="timeout" from="AsteroidSpawner/SpawnerTimer" to="AsteroidSpawner" method="_on_spawner_timer_timeout"]
 [connection signal="timeout" from="PowerUpSpawner/PowerUpTimer" to="PowerUpSpawner" method="_on_power_up_timer_timeout"]
-[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_down"]
-[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_up"]
-[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_down"]
-[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_up"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_up"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_up"]
+[connection signal="pressed" from="GUI/Control/MarginContainer/BtnGroup/TextureRect3/ShootButton" to="Player" method="_on_shoot_button_pressed"]

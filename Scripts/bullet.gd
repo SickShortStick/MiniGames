@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 		movement.get_collider().call("queue_free")
 		queue_free()
 		get_parent().scored()
-		get_parent().spawn_debree(asteroid_position, position.direction_to(asteroid_position))
+		get_parent().spawn_debree(asteroid_position, position, position.direction_to(asteroid_position))
 	elif movement and movement.get_collider():
 		movement.get_collider().queue_free()
 		for asteroid in get_tree().get_nodes_in_group("Asteroids"):
