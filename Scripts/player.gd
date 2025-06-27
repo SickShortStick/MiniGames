@@ -6,7 +6,14 @@ extends Area2D
 @export var BULLET_SCENE : PackedScene
 @onready var bullet_position: Node2D = $BulletPosition
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+const PRESSED_ROTATE_BUTTON = preload("res://Assets/Sprites/PressedRotateButton.png")
+const ROTATE_BUTTON = preload("res://Assets/Sprites/RotateButton.png")
+const SHOOT_BUTTON_PRESSED = preload("res://Assets/Sprites/ShootButtonPressed.png")
+const SHOOT_BUTTON = preload("res://Assets/Sprites/ShootButton.png")
 
+@onready var left_button_texture: TextureRect = $"../GUI/Control/MarginContainer/BtnGroup/HBoxContainer/LeftButtonTexture"
+@onready var right_button_texture: TextureRect = $"../GUI/Control/MarginContainer/BtnGroup/HBoxContainer/RightButtonTexture"
+@onready var shoot_button_texture: TextureRect = $"../GUI/Control/MarginContainer/BtnGroup/ShootButtonTexture"
 
 var health = 3
 var rotation_direction = 0
@@ -29,28 +36,31 @@ func take_damage():
 	animated_sprite_2d.frame += 1
 
 
-func lose():
-	Engine.time_scale = 0
-
-
 func _on_right_btn_button_up() -> void:
 	rotation_direction = 0
+	right_button_texture.texture = ROTATE_BUTTON
 
 
 func _on_left_btn_button_up() -> void:
 	rotation_direction = 0
+	left_button_texture.texture = ROTATE_BUTTON
 
 
 func _on_left_btn_button_down() -> void:
 	rotation_direction = -1
+	left_button_texture.texture = PRESSED_ROTATE_BUTTON
 
 
 func _on_right_btn_button_down() -> void:
 	rotation_direction = 1
+	right_button_texture.texture = PRESSED_ROTATE_BUTTON
 
 
 func _on_shoot_button_pressed() -> void:
+	shoot_button_texture.texture = SHOOT_BUTTON_PRESSED
 	shoot()
+	await get_tree().create_timer(0.2).timeout
+	shoot_button_texture.texture = SHOOT_BUTTON
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -58,4 +68,8 @@ func _on_body_entered(body: Node2D) -> void:
 		body.queue_free()
 		take_damage()
 		if health == 0:
-			lose()
+			get_parent().lose()
+
+
+func _on_shoot_button_button_up() -> void:
+	print('ummmm')

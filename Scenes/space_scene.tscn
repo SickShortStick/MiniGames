@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btcrbv73w6mnh"]
+[gd_scene load_steps=27 format=3 uid="uid://btcrbv73w6mnh"]
 
 [ext_resource type="PackedScene" uid="uid://b0mh43o46ctdp" path="res://Scenes/player.tscn" id="1_dwyqf"]
 [ext_resource type="Script" uid="uid://7mk6e3eyw8k2" path="res://Scripts/space_scene.gd" id="1_spkxt"]
@@ -6,15 +6,99 @@
 [ext_resource type="Script" uid="uid://dlwdfwtg6e5r6" path="res://Scripts/power_up_spawner.gd" id="4_dxw6d"]
 [ext_resource type="Theme" uid="uid://ojnu4qmpjlkl" path="res://Themes/UI.tres" id="4_vqv81"]
 [ext_resource type="Texture2D" uid="uid://cryn0qcm3ubvn" path="res://Assets/Sprites/BackGround-Sheet.png" id="5_dxw6d"]
-[ext_resource type="Texture2D" uid="uid://cilb0pxekwcni" path="res://Assets/Sprites/Button.svg" id="6_jq4nj"]
+[ext_resource type="Texture2D" uid="uid://bmnyc1h8hv5aa" path="res://Assets/Sprites/RotateButton.png" id="8_1p8fg"]
+[ext_resource type="Texture2D" uid="uid://dm488ah37te80" path="res://Assets/Sprites/ScoreDisplay.png" id="8_2anaj"]
+[ext_resource type="Texture2D" uid="uid://bk15p31qjjjvf" path="res://Assets/Sprites/Radar.png" id="8_7ncqj"]
 [ext_resource type="Texture2D" uid="uid://c6xbv1kl7nbxl" path="res://Assets/Sprites/ShootButton.png" id="8_124nk"]
 [ext_resource type="Texture2D" uid="uid://tyf5t3qnymt2" path="res://Assets/Sprites/ForeGround.png" id="9_hu4ar"]
+[ext_resource type="Shader" uid="uid://ddrqy6juohfnx" path="res://ScreenEffect/crt_effect.gdshader" id="10_1p8fg"]
+[ext_resource type="Texture2D" uid="uid://mvuuy7uldv60" path="res://Assets/Sprites/RetryButton.png" id="10_6es0x"]
 
 [sub_resource type="Curve2D" id="Curve2D_mvba5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 720, 720, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1p8fg"]
+shader = ExtResource("10_1p8fg")
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/curvature = 0.08
+shader_parameter/vignette_strength = 0.3
+shader_parameter/scan_intensity = 0.3
+shader_parameter/scan_speed = 2.0
+shader_parameter/tint_color = Vector3(0, 1, 0.2)
+shader_parameter/tint_alpha = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_1p8fg"]
+size = Vector2(720, 720)
+center_offset = Vector3(360, 360, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2anaj"]
+shader = ExtResource("10_1p8fg")
+shader_parameter/resolution = Vector2(720, 720)
+shader_parameter/curvature = 0.045
+shader_parameter/vignette_strength = 0.25
+shader_parameter/scan_intensity = 0.5
+shader_parameter/scan_speed = 2.0
+shader_parameter/tint_color = Vector3(0, 1, 0.2)
+shader_parameter/tint_alpha = 0.2
+
+[sub_resource type="Shader" id="Shader_1p8fg"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform vec2 resolution = vec2(162.0, 70.0);
+
+// Curvature & vignette
+uniform float curvature : hint_range(0.0, 0.2) = 0.01;
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.0;
+
+// Scanlines
+uniform float scan_intensity : hint_range(0.0, 1.0) = 0.0;
+
+// Green tint
+uniform vec3 tint_color = vec3(0.0, 1.0, 0.2);
+// NEW: tint transparency factor (0 = no tint, 1 = full tint)
+uniform float tint_alpha : hint_range(0.0, 1.0) = 0.2;
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+    vec2 ctr = vec2(0.5);
+    vec2 off = uv - ctr;
+    float dist = length(off);
+    uv += off * dist * curvature;
+
+    vec3 col = texture(SCREEN_TEXTURE, uv).rgb;
+
+    // scanlines
+    float scan = sin(uv.y * resolution.y * PI) * scan_intensity;
+    col -= scan;
+
+    // vignette
+    float vig = smoothstep(0.8, 0.5, dist) * vignette_strength;
+    col *= (1.0 - vig);
+
+    // green tint: blend original and tinted versions based on tint_alpha
+    vec3 tinted = col * tint_color;
+    col = mix(col, tinted, tint_alpha);
+
+    COLOR = vec4(col, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6es0x"]
+shader = SubResource("Shader_1p8fg")
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/curvature = 0.08
+shader_parameter/vignette_strength = 0.3
+shader_parameter/scan_intensity = 0.3
+shader_parameter/tint_color = Vector3(0, 1, 0.2)
+shader_parameter/tint_alpha = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_2anaj"]
+size = Vector2(162, 70)
+center_offset = Vector3(360, 360, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_124nk"]
 atlas = ExtResource("5_dxw6d")
@@ -85,59 +169,152 @@ curve = SubResource("Curve2D_mvba5")
 rotation = 1.5708
 
 [node name="GUI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="CRTTesting" type="MeshInstance2D" parent="GUI"]
+visible = false
+material = SubResource("ShaderMaterial_1p8fg")
+position = Vector2(949, -223)
+mesh = SubResource("QuadMesh_1p8fg")
+
+[node name="CRT" type="ColorRect" parent="GUI"]
+material = SubResource("ShaderMaterial_2anaj")
+offset_right = 720.0
+offset_bottom = 720.0
+mouse_filter = 1
+
+[node name="ForeGround" type="Sprite2D" parent="GUI"]
+position = Vector2(360, 641)
+texture = ExtResource("9_hu4ar")
 
 [node name="Control" type="Control" parent="GUI"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.514
+anchor_top = 0.502
+anchor_right = 0.514
+anchor_bottom = 0.502
+offset_left = -370.08
+offset_top = -642.56
+offset_right = 349.92
+offset_bottom = 642.44
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("4_vqv81")
 
-[node name="ScoreLabel" type="Label" parent="GUI/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 756.0
-offset_right = 20.0
-offset_bottom = 823.0
+[node name="OuterCircle" type="Sprite2D" parent="GUI/Control"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(360, 360)
+texture = ExtResource("8_7ncqj")
+
+[node name="InnerCircle" type="Sprite2D" parent="GUI/Control/OuterCircle"]
+self_modulate = Color(0, 0.152941, 0, 0.988235)
+clip_children = 2
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("8_7ncqj")
+
+[node name="RetryButtonTexture" type="TextureRect" parent="GUI/Control/OuterCircle/InnerCircle"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -70.0
+offset_right = -623.0
+offset_bottom = -613.0
 grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(60, 70)
+texture = ExtResource("10_6es0x")
+
+[node name="RetryButton" type="Button" parent="GUI/Control/OuterCircle/InnerCircle/RetryButtonTexture"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HighScoreTextureRect" type="TextureRect" parent="GUI/Control"]
+offset_left = 379.0
+offset_top = 732.0
+offset_right = 561.0
+offset_bottom = 820.0
+texture = ExtResource("8_2anaj")
+
+[node name="HighScoreLabel" type="Label" parent="GUI/Control/HighScoreTextureRect"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ScoreCRT" type="MeshInstance2D" parent="GUI/Control/HighScoreTextureRect/HighScoreLabel"]
+z_index = -1
+material = SubResource("ShaderMaterial_6es0x")
+position = Vector2(-278, -326)
+mesh = SubResource("QuadMesh_2anaj")
+
+[node name="ScoreTextureRect" type="TextureRect" parent="GUI/Control"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 732.0
+offset_right = 343.0
+offset_bottom = 820.0
+texture = ExtResource("8_2anaj")
+
+[node name="ScoreLabel" type="Label" parent="GUI/Control/ScoreTextureRect"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreCRT" type="MeshInstance2D" parent="GUI/Control/ScoreTextureRect/ScoreLabel"]
+z_index = -1
+material = SubResource("ShaderMaterial_6es0x")
+position = Vector2(-278, -326)
+mesh = SubResource("QuadMesh_2anaj")
+
 [node name="MarginContainer" type="MarginContainer" parent="GUI/Control"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -365.0
-offset_top = -220.0
-offset_right = 365.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 13.0
+offset_top = 1032.0
+offset_right = 708.0
+offset_bottom = 1265.0
 
 [node name="BtnGroup" type="HBoxContainer" parent="GUI/Control/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 200
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/Control/MarginContainer/BtnGroup"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="TextureRect" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
+[node name="LeftButtonTexture" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_jq4nj")
+texture = ExtResource("8_1p8fg")
 
-[node name="LeftBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect"]
+[node name="LeftBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/LeftButtonTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,12 +322,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
+[node name="RightButtonTexture" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_jq4nj")
+texture = ExtResource("8_1p8fg")
 flip_h = true
 
-[node name="RightBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2"]
+[node name="RightBtn" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/RightButtonTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,11 +335,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect3" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
+[node name="ShootButtonTexture" type="TextureRect" parent="GUI/Control/MarginContainer/BtnGroup"]
 layout_mode = 2
 texture = ExtResource("8_124nk")
 
-[node name="ShootButton" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/TextureRect3"]
+[node name="ShootButton" type="Button" parent="GUI/Control/MarginContainer/BtnGroup/ShootButtonTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -178,17 +355,15 @@ scale = Vector2(1.00278, 1.25392)
 sprite_frames = SubResource("SpriteFrames_2anaj")
 autoplay = "default"
 
-[node name="ForeGround" type="Sprite2D" parent="."]
-position = Vector2(360, 649.5)
-texture = ExtResource("9_hu4ar")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(360, 640)
 
 [connection signal="timeout" from="AsteroidSpawner/SpawnerTimer" to="AsteroidSpawner" method="_on_spawner_timer_timeout"]
 [connection signal="timeout" from="PowerUpSpawner/PowerUpTimer" to="PowerUpSpawner" method="_on_power_up_timer_timeout"]
-[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_down"]
-[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect/LeftBtn" to="Player" method="_on_left_btn_button_up"]
-[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_down"]
-[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/TextureRect2/RightBtn" to="Player" method="_on_right_btn_button_up"]
-[connection signal="pressed" from="GUI/Control/MarginContainer/BtnGroup/TextureRect3/ShootButton" to="Player" method="_on_shoot_button_pressed"]
+[connection signal="pressed" from="GUI/Control/OuterCircle/InnerCircle/RetryButtonTexture/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/LeftButtonTexture/LeftBtn" to="Player" method="_on_left_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/LeftButtonTexture/LeftBtn" to="Player" method="_on_left_btn_button_up"]
+[connection signal="button_down" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/RightButtonTexture/RightBtn" to="Player" method="_on_right_btn_button_down"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/HBoxContainer/RightButtonTexture/RightBtn" to="Player" method="_on_right_btn_button_up"]
+[connection signal="button_up" from="GUI/Control/MarginContainer/BtnGroup/ShootButtonTexture/ShootButton" to="Player" method="_on_shoot_button_button_up"]
+[connection signal="pressed" from="GUI/Control/MarginContainer/BtnGroup/ShootButtonTexture/ShootButton" to="Player" method="_on_shoot_button_pressed"]

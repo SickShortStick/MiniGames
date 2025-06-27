@@ -14,6 +14,7 @@ func _physics_process(delta: float) -> void:
 		get_parent().spawn_debree(asteroid_position, position, position.direction_to(asteroid_position))
 	elif movement and movement.get_collider():
 		movement.get_collider().queue_free()
+		get_parent().spawn_ice_debree(movement.get_collider().position, position.direction_to(movement.get_collider().position))
 		for asteroid in get_tree().get_nodes_in_group("Asteroids"):
 			asteroid.freeze()
 		await get_tree().create_timer(2.0).timeout
