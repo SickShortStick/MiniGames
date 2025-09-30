@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bopc5y6i0uejy"
-path="res://.godot/imported/ice.svg-1ecf1c0091bc640ede5dcba34e0da8e9.ctex"
+uid="uid://m55bqhd11jyq"
+path="res://.godot/imported/Player.svg-9b19ef122265d60292c578b759b48abc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/ice.svg"
-dest_files=["res://.godot/imported/ice.svg-1ecf1c0091bc640ede5dcba34e0da8e9.ctex"]
+source_file="res://Assets/Space/Sprites/Player.svg"
+dest_files=["res://.godot/imported/Player.svg-9b19ef122265d60292c578b759b48abc.ctex"]
 
 [params]
 

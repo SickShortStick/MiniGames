@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ocglufk7owui"]
 
-[ext_resource type="Script" uid="uid://cjf354dm8716g" path="res://Scripts/bullet.gd" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://bwbdlw5o74qjv" path="res://Assets/Sprites/bullet.svg" id="1_xjght"]
+[ext_resource type="Script" uid="uid://cjf354dm8716g" path="res://Scripts/Space/bullet.gd" id="1_rxiky"]
+[ext_resource type="Texture2D" uid="uid://bwbdlw5o74qjv" path="res://Assets/Space/Sprites/bullet.svg" id="2_xsf5l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
 radius = 16.0312
@@ -10,10 +10,10 @@ radius = 16.0312
 collision_layer = 0
 gravity_scale = 0.0
 linear_velocity = Vector2(20, 0)
-script = ExtResource("1_oduel")
+script = ExtResource("1_rxiky")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_xjght")
+texture = ExtResource("2_xsf5l")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_oduel")

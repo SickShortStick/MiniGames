@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8oklgg8tiidl"]
 
-[ext_resource type="Texture2D" uid="uid://bwbdlw5o74qjv" path="res://Assets/Sprites/bullet.svg" id="1_k3kkb"]
+[ext_resource type="Texture2D" uid="uid://bwbdlw5o74qjv" path="res://Assets/Space/Sprites/bullet.svg" id="1_liycx"]
 
 [sub_resource type="Curve" id="Curve_x8gw3"]
 _data = [Vector2(0.0268456, 1), 0.0, 0.0, 0, 0, Vector2(0.734899, 0.809811), -0.73542, -0.73542, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -9,7 +9,7 @@ point_count = 3
 [node name="BulletDebree" type="CPUParticles2D"]
 emitting = false
 amount = 12
-texture = ExtResource("1_k3kkb")
+texture = ExtResource("1_liycx")
 lifetime = 1.2
 one_shot = true
 explosiveness = 1.0

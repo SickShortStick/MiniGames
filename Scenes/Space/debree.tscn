@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://3cnf1pdsbqal"]
+[gd_scene load_steps=4 format=3 uid="uid://cbfh786ie55ve"]
 
-[ext_resource type="Texture2D" uid="uid://bopc5y6i0uejy" path="res://Assets/Sprites/ice.svg" id="1_d476b"]
+[ext_resource type="Texture2D" uid="uid://d02w77nqfnhxt" path="res://Assets/Space/Sprites/asteroid1.svg" id="1_6b8nd"]
 
 [sub_resource type="Curve" id="Curve_s7ykv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.731544, 0.697935), -1.20391, -1.20391, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -10,10 +10,10 @@ point_count = 3
 offsets = PackedFloat32Array(0.0163934, 1)
 colors = PackedColorArray(1, 1, 1, 0.682353, 1, 1, 1, 0)
 
-[node name="IceDebree" type="CPUParticles2D"]
+[node name="Debree" type="CPUParticles2D"]
 emitting = false
 amount = 12
-texture = ExtResource("1_d476b")
+texture = ExtResource("1_6b8nd")
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0

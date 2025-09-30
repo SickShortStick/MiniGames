@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://d3uiaad001jpi"
-path="res://.godot/imported/Minecraft.ttf-1a3f19d95948bdeda6b69a9818d348e6.fontdata"
+path="res://.godot/imported/Minecraft.ttf-0f47db18a47164a088dc7c26e9b0f2e6.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Minecraft.ttf"
-dest_files=["res://.godot/imported/Minecraft.ttf-1a3f19d95948bdeda6b69a9818d348e6.fontdata"]
+source_file="res://Assets/Space/Font/Minecraft.ttf"
+dest_files=["res://.godot/imported/Minecraft.ttf-0f47db18a47164a088dc7c26e9b0f2e6.fontdata"]
 
 [params]
 

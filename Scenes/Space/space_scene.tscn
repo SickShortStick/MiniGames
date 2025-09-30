@@ -1,18 +1,18 @@
 [gd_scene load_steps=27 format=3 uid="uid://btcrbv73w6mnh"]
 
-[ext_resource type="PackedScene" uid="uid://b0mh43o46ctdp" path="res://Scenes/player.tscn" id="1_dwyqf"]
-[ext_resource type="Script" uid="uid://7mk6e3eyw8k2" path="res://Scripts/space_scene.gd" id="1_spkxt"]
-[ext_resource type="Script" uid="uid://j2xpqx8dgnxe" path="res://Scripts/asteroid_spawner.gd" id="2_mvba5"]
-[ext_resource type="Script" uid="uid://dlwdfwtg6e5r6" path="res://Scripts/power_up_spawner.gd" id="4_dxw6d"]
+[ext_resource type="PackedScene" uid="uid://b0mh43o46ctdp" path="res://Scenes/Space/player.tscn" id="1_dwyqf"]
+[ext_resource type="Script" uid="uid://7mk6e3eyw8k2" path="res://Scripts/Space/space_scene.gd" id="1_spkxt"]
+[ext_resource type="Script" uid="uid://j2xpqx8dgnxe" path="res://Scripts/Space/asteroid_spawner.gd" id="2_mvba5"]
+[ext_resource type="Script" uid="uid://dlwdfwtg6e5r6" path="res://Scripts/Space/power_up_spawner.gd" id="4_dxw6d"]
 [ext_resource type="Theme" uid="uid://ojnu4qmpjlkl" path="res://Themes/UI.tres" id="4_vqv81"]
-[ext_resource type="Texture2D" uid="uid://cryn0qcm3ubvn" path="res://Assets/Sprites/BackGround-Sheet.png" id="5_dxw6d"]
-[ext_resource type="Texture2D" uid="uid://bmnyc1h8hv5aa" path="res://Assets/Sprites/RotateButton.png" id="8_1p8fg"]
-[ext_resource type="Texture2D" uid="uid://dm488ah37te80" path="res://Assets/Sprites/ScoreDisplay.png" id="8_2anaj"]
-[ext_resource type="Texture2D" uid="uid://bk15p31qjjjvf" path="res://Assets/Sprites/Radar.png" id="8_7ncqj"]
-[ext_resource type="Texture2D" uid="uid://c6xbv1kl7nbxl" path="res://Assets/Sprites/ShootButton.png" id="8_124nk"]
-[ext_resource type="Texture2D" uid="uid://tyf5t3qnymt2" path="res://Assets/Sprites/ForeGround.png" id="9_hu4ar"]
-[ext_resource type="Shader" uid="uid://ddrqy6juohfnx" path="res://ScreenEffect/crt_effect.gdshader" id="10_1p8fg"]
-[ext_resource type="Texture2D" uid="uid://mvuuy7uldv60" path="res://Assets/Sprites/RetryButton.png" id="10_6es0x"]
+[ext_resource type="Texture2D" uid="uid://cryn0qcm3ubvn" path="res://Assets/Space/Sprites/BackGround-Sheet.png" id="5_dxw6d"]
+[ext_resource type="Texture2D" uid="uid://bmnyc1h8hv5aa" path="res://Assets/Space/Sprites/RotateButton.png" id="8_1p8fg"]
+[ext_resource type="Texture2D" uid="uid://dm488ah37te80" path="res://Assets/Space/Sprites/ScoreDisplay.png" id="8_2anaj"]
+[ext_resource type="Texture2D" uid="uid://bk15p31qjjjvf" path="res://Assets/Space/Sprites/Radar.png" id="8_7ncqj"]
+[ext_resource type="Texture2D" uid="uid://c6xbv1kl7nbxl" path="res://Assets/Space/Sprites/ShootButton.png" id="8_124nk"]
+[ext_resource type="Texture2D" uid="uid://tyf5t3qnymt2" path="res://Assets/Space/Sprites/ForeGround.png" id="9_hu4ar"]
+[ext_resource type="Shader" uid="uid://ddrqy6juohfnx" path="res://ScreenEffect/Space/crt_effect.gdshader" id="10_1p8fg"]
+[ext_resource type="Texture2D" uid="uid://mvuuy7uldv60" path="res://Assets/Space/Sprites/RetryButton.png" id="10_6es0x"]
 
 [sub_resource type="Curve2D" id="Curve2D_mvba5"]
 _data = {
@@ -237,6 +237,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HighScoreTextureRect" type="TextureRect" parent="GUI/Control"]
+layout_mode = 0
 offset_left = 379.0
 offset_top = 732.0
 offset_right = 561.0

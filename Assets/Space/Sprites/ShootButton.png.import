@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cryn0qcm3ubvn"
-path="res://.godot/imported/BackGround-Sheet.png-c9eeef34e717dd5812b18f7d12e2ed2d.ctex"
+uid="uid://c6xbv1kl7nbxl"
+path="res://.godot/imported/ShootButton.png-b5a94a06baae8bb786fbc796fea53f24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/BackGround-Sheet.png"
-dest_files=["res://.godot/imported/BackGround-Sheet.png-c9eeef34e717dd5812b18f7d12e2ed2d.ctex"]
+source_file="res://Assets/Space/Sprites/ShootButton.png"
+dest_files=["res://.godot/imported/ShootButton.png-b5a94a06baae8bb786fbc796fea53f24.ctex"]
 
 [params]
 

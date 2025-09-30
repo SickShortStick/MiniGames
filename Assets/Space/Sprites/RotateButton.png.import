@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mvuuy7uldv60"
-path="res://.godot/imported/RetryButton.png-524cb03f946fea59ecfd7d521a3feaaf.ctex"
+uid="uid://bmnyc1h8hv5aa"
+path="res://.godot/imported/RotateButton.png-72cb7dd26d4fbd65f79f611b1ebe9ff0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/RetryButton.png"
-dest_files=["res://.godot/imported/RetryButton.png-524cb03f946fea59ecfd7d521a3feaaf.ctex"]
+source_file="res://Assets/Space/Sprites/RotateButton.png"
+dest_files=["res://.godot/imported/RotateButton.png-72cb7dd26d4fbd65f79f611b1ebe9ff0.ctex"]
 
 [params]
 

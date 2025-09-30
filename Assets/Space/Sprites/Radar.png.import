@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d02w77nqfnhxt"
-path="res://.godot/imported/asteroid1.svg-8e1b314977555c7c84a249c61dcd27b7.ctex"
+uid="uid://bk15p31qjjjvf"
+path="res://.godot/imported/Radar.png-44e87f0ec4dd734842f4a720bb117096.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/asteroid1.svg"
-dest_files=["res://.godot/imported/asteroid1.svg-8e1b314977555c7c84a249c61dcd27b7.ctex"]
+source_file="res://Assets/Space/Sprites/Radar.png"
+dest_files=["res://.godot/imported/Radar.png-44e87f0ec4dd734842f4a720bb117096.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

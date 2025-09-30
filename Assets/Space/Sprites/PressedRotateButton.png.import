@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk15p31qjjjvf"
-path="res://.godot/imported/Radar.png-1dfeb7204101ef3c7c37d8326c923206.ctex"
+uid="uid://dqnydgok1vf8e"
+path="res://.godot/imported/PressedRotateButton.png-2b43a484a14c1cba7978dde743129dd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Radar.png"
-dest_files=["res://.godot/imported/Radar.png-1dfeb7204101ef3c7c37d8326c923206.ctex"]
+source_file="res://Assets/Space/Sprites/PressedRotateButton.png"
+dest_files=["res://.godot/imported/PressedRotateButton.png-2b43a484a14c1cba7978dde743129dd1.ctex"]
 
 [params]
 

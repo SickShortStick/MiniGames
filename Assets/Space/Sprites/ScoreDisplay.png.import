@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmnyc1h8hv5aa"
-path="res://.godot/imported/RotateButton.png-00121dd3384613265e54bf776b562153.ctex"
+uid="uid://dm488ah37te80"
+path="res://.godot/imported/ScoreDisplay.png-2e6b386e3360d0f37c3319c721840aaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/RotateButton.png"
-dest_files=["res://.godot/imported/RotateButton.png-00121dd3384613265e54bf776b562153.ctex"]
+source_file="res://Assets/Space/Sprites/ScoreDisplay.png"
+dest_files=["res://.godot/imported/ScoreDisplay.png-2e6b386e3360d0f37c3319c721840aaa.ctex"]
 
 [params]
 

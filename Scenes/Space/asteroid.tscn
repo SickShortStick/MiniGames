@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://blgo0grt2ewsq"]
 
-[ext_resource type="Texture2D" uid="uid://d02w77nqfnhxt" path="res://Assets/Sprites/asteroid1.svg" id="1_0tomg"]
-[ext_resource type="Script" uid="uid://btqcbml5xt52y" path="res://Scripts/asteroid.gd" id="1_a2bka"]
+[ext_resource type="Script" uid="uid://btqcbml5xt52y" path="res://Scripts/Space/asteroid.gd" id="1_ayki3"]
+[ext_resource type="Texture2D" uid="uid://d02w77nqfnhxt" path="res://Assets/Space/Sprites/asteroid1.svg" id="2_g2wde"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a2bka"]
 radius = 25.02
@@ -10,11 +10,11 @@ radius = 25.02
 collision_mask = 0
 gravity_scale = 0.0
 can_sleep = false
-script = ExtResource("1_a2bka")
+script = ExtResource("1_ayki3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
-texture = ExtResource("1_0tomg")
+texture = ExtResource("2_g2wde")
 
 [node name="IceLayer" type="ColorRect" parent="Sprite2D"]
 visible = false
