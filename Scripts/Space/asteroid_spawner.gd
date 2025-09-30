@@ -3,7 +3,7 @@ extends Node
 
 @export var asteroid_speed = 100
 @onready var player: Area2D = $"../Player"
-const ASTEROID = preload("res://Scenes/asteroid.tscn")
+const ASTEROID = preload("res://Scenes/Space/asteroid.tscn")
 @onready var spawn_line: PathFollow2D = $"../Path2D/SpawnLine"
 @onready var path_2d: Path2D = $"../Path2D"
 

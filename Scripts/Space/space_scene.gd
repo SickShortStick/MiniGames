@@ -4,9 +4,9 @@ extends Node
 var score = 0
 @onready var score_label: Label = $GUI/Control/ScoreTextureRect/ScoreLabel
 
-const DEBREE = preload("res://Scenes/debree.tscn")
-const BULLET_DEBREE = preload("res://Scenes/bullet_debree.tscn")
-const ICE_DEBREE = preload("res://Scenes/ice_debree.tscn")
+const DEBREE = preload("res://Scenes/Space/debree.tscn")
+const BULLET_DEBREE = preload("res://Scenes/Space/bullet_debree.tscn")
+const ICE_DEBREE = preload("res://Scenes/Space/ice_debree.tscn")
 
 @onready var cam = $Camera2D
 @onready var screen_size = get_viewport().size
@@ -15,8 +15,8 @@ const ICE_DEBREE = preload("res://Scenes/ice_debree.tscn")
 @onready var inner_circle: Sprite2D = $GUI/Control/OuterCircle/InnerCircle
 @onready var retry_button_texture: TextureRect = $GUI/Control/OuterCircle/InnerCircle/RetryButtonTexture
 
-const CRT_EFFECT = preload("res://ScreenEffect/crt_effect.gdshader")
-const GAME_OVER_CRT_EFFECT = preload("res://ScreenEffect/game_over_crt_effect.gdshader")
+const CRT_EFFECT = preload("res://ScreenEffect/Space/crt_effect.gdshader")
+const GAME_OVER_CRT_EFFECT = preload("res://ScreenEffect/Space/game_over_crt_effect.gdshader")
 
 @onready var crt: ColorRect = $GUI/CRT
 

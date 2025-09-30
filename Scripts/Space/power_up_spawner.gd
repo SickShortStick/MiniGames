@@ -1,7 +1,7 @@
 extends Node
 
 
-const ICE = preload("res://Scenes/ice.tscn")
+const ICE = preload("res://Scenes/Space/ice.tscn")
 @export var ice_speed = 100
 @onready var player_position = $"../Player".position
 @onready var spawn_line: PathFollow2D = $"../Path2D/SpawnLine"

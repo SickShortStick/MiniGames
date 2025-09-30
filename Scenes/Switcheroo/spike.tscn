@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg6sjbqrxq7ee"]
+
+[ext_resource type="Script" uid="uid://cisdj46w2u5sh" path="res://Scripts/Switcheroo/spike.gd" id="1_arjuu"]
+[ext_resource type="Texture2D" uid="uid://buw1e7wexdhmq" path="res://Assets/Switcheroo/Sprites/Spike.png" id="2_1hdpb"]
+
+[node name="Spike" type="RigidBody2D" groups=["Spikes"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_arjuu")
+metadata/_custom_type_script = "uid://cisdj46w2u5sh"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("2_1hdpb")
+
+[node name="HitBox" type="CollisionPolygon2D" parent="."]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-42, 42, 40, 0, -42, -42)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

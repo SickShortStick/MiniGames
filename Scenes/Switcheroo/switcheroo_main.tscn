@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://dub6edtrv62kq"]
+
+[ext_resource type="Script" uid="uid://c6xbvaj0isa8b" path="res://Scripts/Switcheroo/main_scene.gd" id="1_kv5jy"]
+[ext_resource type="PackedScene" uid="uid://dp8ixhmcy1l1w" path="res://Scenes/Switcheroo/wall.tscn" id="2_2im1x"]
+[ext_resource type="Texture2D" uid="uid://cvmij0sbnrsv5" path="res://Assets/Switcheroo/Sprites/Background2.png" id="3_n23da"]
+[ext_resource type="Theme" uid="uid://dhtvdxlmw8lkj" path="res://Themes/Switcheroo/game_theme.tres" id="4_l8eli"]
+[ext_resource type="PackedScene" uid="uid://l0rtfcf7lmh5" path="res://Scenes/Switcheroo/player.tscn" id="6_lj4b1"]
+[ext_resource type="Script" uid="uid://docw7h8lc18i3" path="res://Scripts/Switcheroo/spike_spawner.gd" id="7_fnt4c"]
+[ext_resource type="Script" uid="uid://og37fecq3t87" path="res://Scripts/Switcheroo/game_info.gd" id="8_gle7t"]
+
+[node name="MainScene" type="Node"]
+script = ExtResource("1_kv5jy")
+
+[node name="LeftWall" parent="." instance=ExtResource("2_2im1x")]
+position = Vector2(16, 960)
+collision_layer = 2
+
+[node name="RightWall" parent="." instance=ExtResource("2_2im1x")]
+position = Vector2(704, 960)
+collision_layer = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_l8eli")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="Sprite2D" parent="CanvasLayer/Control"]
+visible = false
+position = Vector2(540, 960)
+texture = ExtResource("3_n23da")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_n23da")
+expand_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("6_lj4b1")]
+z_index = 5
+position = Vector2(112, 1058)
+scale = Vector2(0.66, 0.66)
+collision_mask = 3
+falling_speed = 12000
+jumping_speed = 2400
+switching_sides_speed = 160
+
+[node name="RightSpawnPoint" type="Node2D" parent="."]
+position = Vector2(646, 0)
+
+[node name="LeftSpawnPoint" type="Node2D" parent="."]
+position = Vector2(72, 0)
+
+[node name="SpikeSpawner" type="Node" parent="."]
+script = ExtResource("7_fnt4c")
+
+[node name="SpawnerTimer" type="Timer" parent="SpikeSpawner"]
+autostart = true
+
+[node name="GameInfo" type="Node" parent="."]
+script = ExtResource("8_gle7t")
+
+[connection signal="timeout" from="SpikeSpawner/SpawnerTimer" to="SpikeSpawner" method="_on_spawner_timer_timeout"]

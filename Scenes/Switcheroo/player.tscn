@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://l0rtfcf7lmh5"]
+
+[ext_resource type="Script" uid="uid://bwt7iva8s5wmx" path="res://Scripts/Switcheroo/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://yyfyg2riv5wt" path="res://Assets/Switcheroo/Sprites/Player.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://bsglkhv2o5ero" path="res://Assets/Switcheroo/Sprites/DieParticle.png" id="3_6t5aa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(128, 128)
+
+[sub_resource type="Animation" id="Animation_fkybt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vgqql"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.133972, 0.189465),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3wgy"]
+_data = {
+&"RESET": SubResource("Animation_fkybt"),
+&"die": SubResource("Animation_vgqql")
+}
+
+[sub_resource type="Curve" id="Curve_3smsa"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8erm5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.827982, 0.696616), -1.73918, -1.73918, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Player" type="CharacterBody2D"]
+up_direction = Vector2(1, 0)
+script = ExtResource("1_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v0iea")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="Checker" type="RayCast2D" parent="."]
+position = Vector2(-1080, 0)
+target_position = Vector2(2160, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x3wgy")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 12
+texture = ExtResource("3_6t5aa")
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 236.56
+angular_velocity_min = -80.0
+angular_velocity_max = 80.0
+damping_max = 4.0
+damping_curve = SubResource("Curve_3smsa")
+scale_amount_min = 0.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_8erm5")

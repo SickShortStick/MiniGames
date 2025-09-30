@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp8ixhmcy1l1w"]
+
+[ext_resource type="Texture2D" uid="uid://n3hart6esydg" path="res://Assets/Switcheroo/Sprites/Wall.png" id="1_d155t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjehn"]
+size = Vector2(32, 1980)
+
+[node name="Wall" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d155t")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yjehn")
+debug_color = Color(0, 0.6, 0.701961, 0)

@@ -1,0 +1,30 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dp6cohntb8t8f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y702a"]
+bg_color = Color(0.961584, 0.859639, 0.89841, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.91726, 0.726624, 0.803284, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2f4un"]
+bg_color = Color(0.961584, 0.859639, 0.89841, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.91726, 0.726624, 0.803284, 1)
+
+[resource]
+GridContainer/constants/h_separation = 50
+GridContainer/constants/v_separation = 50
+HBoxContainer/constants/separation = 50
+MarginContainer/constants/margin_bottom = 50
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 50
+OuterPanel/base_type = &"PanelContainer"
+OuterPanel/styles/panel = SubResource("StyleBoxFlat_y702a")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2f4un")
+VBoxContainer/constants/separation = 25

@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://c637fhnoerkqf"]
+
+[ext_resource type="Script" uid="uid://br1d0th12sdh7" path="res://Scripts/game_selector_scene.gd" id="1_125nu"]
+[ext_resource type="Theme" uid="uid://dp6cohntb8t8f" path="res://Themes/GameSelectTheme.tres" id="1_mvent"]
+[ext_resource type="Texture2D" uid="uid://m55bqhd11jyq" path="res://Assets/Space/Sprites/Player.svg" id="3_fn1gr"]
+[ext_resource type="Texture2D" uid="uid://yyfyg2riv5wt" path="res://Assets/Switcheroo/Sprites/Player.png" id="4_160eo"]
+
+[node name="GameSelectorScene" type="Node"]
+script = ExtResource("1_125nu")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mvent")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="SpaceTex" type="TextureRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_fn1gr")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Space" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpaceTex"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Switcheroo" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SwitcherooTex" type="TextureRect" parent="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Switcheroo"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_160eo")
+expand_mode = 2
+
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpaceTex/Space" to="." method="_on_space_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Switcheroo" to="." method="_on_button_pressed"]

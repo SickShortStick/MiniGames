@@ -6,10 +6,10 @@ extends Area2D
 @export var BULLET_SCENE : PackedScene
 @onready var bullet_position: Node2D = $BulletPosition
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-const PRESSED_ROTATE_BUTTON = preload("res://Assets/Sprites/PressedRotateButton.png")
-const ROTATE_BUTTON = preload("res://Assets/Sprites/RotateButton.png")
-const SHOOT_BUTTON_PRESSED = preload("res://Assets/Sprites/ShootButtonPressed.png")
-const SHOOT_BUTTON = preload("res://Assets/Sprites/ShootButton.png")
+const PRESSED_ROTATE_BUTTON = preload("res://Assets/Space/Sprites/PressedRotateButton.png")
+const ROTATE_BUTTON = preload("res://Assets/Space/Sprites/RotateButton.png")
+const SHOOT_BUTTON_PRESSED = preload("res://Assets/Space/Sprites/ShootButtonPressed.png")
+const SHOOT_BUTTON = preload("res://Assets/Space/Sprites/ShootButton.png")
 
 @onready var left_button_texture: TextureRect = $"../GUI/Control/MarginContainer/BtnGroup/HBoxContainer/LeftButtonTexture"
 @onready var right_button_texture: TextureRect = $"../GUI/Control/MarginContainer/BtnGroup/HBoxContainer/RightButtonTexture"
